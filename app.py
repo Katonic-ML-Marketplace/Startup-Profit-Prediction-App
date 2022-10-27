@@ -36,7 +36,7 @@ def get_predict_profit(r_d_expenses, administration_expenses, marketing_expenses
     x[2] = marketing_expenses
     if state_index >= 0:
         x[state_index] = 1
-
+    
     return round(model.predict([x])[0], 2)
 
 @app.route('/')
