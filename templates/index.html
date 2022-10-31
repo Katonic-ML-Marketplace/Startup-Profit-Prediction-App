@@ -24,7 +24,7 @@
                {% if show_hidden == True %}
                <div class="alert alert-success" role="alert">{{ prediction_text }}</div>
                {% endif %}
-               <form action="{{ url_for('predict')}}"method="post" class="needs-validation" >
+               <form action="predict" method="post" class="needs-validation" >
                   <div class="row">
                      <div class="col-md-6 mb-3">
                         <label for="r_d_expenses">R&D Expenses</label>
