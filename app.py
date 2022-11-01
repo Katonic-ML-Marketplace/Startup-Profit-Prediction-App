@@ -1,10 +1,23 @@
 from flask import Flask, request, render_template
 import pickle
 import json
+import os
 import numpy as np
 
-
 app = Flask(__name__)
+
+@app.route('/')
+def index_page():
+    """
+    * method: index_page
+    * description: method to call index html page
+    * return: index.html
+    *
+    * Parameters
+    *   None
+    """
+    return render_template('index.html')
+
 
 def get_predict_profit(r_d_expenses, administration_expenses, marketing_expenses, state):
     """
@@ -36,20 +49,8 @@ def get_predict_profit(r_d_expenses, administration_expenses, marketing_expenses
     x[2] = marketing_expenses
     if state_index >= 0:
         x[state_index] = 1
-
+    
     return round(model.predict([x])[0], 2)
-
-@app.route('/')
-def index_page():
-    """
-    * method: index_page
-    * description: method to call index html page
-    * return: index.html
-    *
-    * Parameters
-    *   None
-    """
-    return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -66,8 +67,8 @@ def predict():
         administration_expenses = request.form["administration_expenses"]
         marketing_expenses = request.form["marketing_expenses"]
         state = request.form["state"]
-        output = get_predict_profit(r_d_expenses, administration_expenses, marketing_expenses, state)
-        return render_template('index.html', show_hidden=True, prediction_text='Startup Profit must be $ {}'.format(output))
+        output = get_predict_profit(r_d_expenses, administration_expenses, marketing_expenses, state) 
+        return render_template('index.html', show_hidden=True, prediction_text=f'Startup Profit must be $ {output}')
 
 
 if __name__ == "__main__":
