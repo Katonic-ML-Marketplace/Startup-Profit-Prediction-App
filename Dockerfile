@@ -1,8 +1,9 @@
 FROM python:3.8.2-slim
 
-RUN mkdir -p models templates
+RUN mkdir -p static models templates
 
 COPY app.py .
+COPY static/logo.png static/.
 COPY models/columns.json models/.
 COPY models/profit_prediction_model.pkl models/.
 COPY templates/index.html templates/.

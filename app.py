@@ -4,7 +4,7 @@ import json
 import os
 import numpy as np
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder='static')
 
 @app.route('/')
 def index_page():
